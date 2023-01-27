@@ -38,7 +38,7 @@ class SnakeGameAI:
 
         self.direction = None
         self.BLOCK_SIZE = 20
-        self.SPEED = 15
+        self.SPEED = 40
         self.w = w
         self.h = h
         # init display
@@ -86,6 +86,7 @@ class SnakeGameAI:
         self.snake.insert(0, self.head)
 
         # check if game over
+        reward = 0
         game_over = False
         if self.is_collision() or self.frame_iteration > 100 * len(self.snake):
             game_over = True
@@ -142,7 +143,7 @@ class SnakeGameAI:
         elif np.array_equal(action, [0, 1, 0]):  # clockwise r->d->l->u
             next_idx = (idx + 1) % 4
             new_dir = clock_wise[next_idx]
-        elif np.array_equal(action, [0, 1, 0]):  # counter clockwise r->u->l->d
+        elif np.array_equal(action, [0, 0, 1]):  # counter clockwise r->u->l->d
             next_idx = (idx - 1) % 4
             new_dir = clock_wise[next_idx]
 
